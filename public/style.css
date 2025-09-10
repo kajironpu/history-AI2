@@ -137,6 +137,20 @@ button:disabled {
     font-size: 0.95em;
 }
 
+/* 開始ボタンの幅を固定して中央寄せ */
+#start-quiz-btn {
+    display: block;           /* ブロック要素にして幅を効かせる */
+    width: 100%;              /* 親幅いっぱい */
+    max-width: 400px;         /* 最大幅を制限 */
+    margin: 20px auto;        /* 中央寄せ */
+    padding: 15px 30px;       /* 高さ・横幅を広げる */
+    font-size: 18px;          /* 文字を大きくする */
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;   /* paddingを幅に含める */
+    cursor: pointer;
+}
+
 #next-question-btn {
     display: none;
     margin: 20px auto 0;       /* 中央寄せ */
