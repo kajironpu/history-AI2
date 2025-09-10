@@ -3,12 +3,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { keyword, era } = req.body;
-  if (!keyword || !era) {
-    return res.status(400).json({ error: "keyword と era が必要です" });
+  const { keyword } = req.body;
+  if (!keyword) {
+    return res.status(400).json({ error: "keyword is required" });
   }
 
-  // 改善したプロンプト
   const prompt = `
 中学生向けの歴史クイズを作ってください。
 対象の時代は「${era}」です。
