@@ -139,21 +139,15 @@ button:disabled {
 
 #next-question-btn {
     display: none;
-    position: absolute;       /* 絶対配置 */
-    top: 50%;                 /* 画面の縦中央 */
-    left: 50%;                /* 画面の横中央 */
-    transform: translate(-50%, -50%); /* 完全中央に補正 */
+    margin: 15px auto 0; /* 上:15px、左右:autoで中央寄せ */
     background-color: #28a745;
-    padding: 12px 20px;
+    padding: 10px 15px;
+    width: auto;         /* 内容に合わせる */
     max-width: 300px;
     border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
 }
-#next-question-btn:hover {
-    background-color: #218838;
-}
+
 
 
 #next-question-btn:hover {
