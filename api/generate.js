@@ -11,8 +11,18 @@ export default async function handler(req, res) {
   const prompt = `
 中学生向けの歴史クイズを作ってください。
 正解は「${keyword}」です。
-問題文と3つの選択肢、解説をJSON形式で返してください。
-余計な説明やマークダウン記号（\`\`\`json など）は含めないでください。
+絶対にJSON形式のみで返してください。余計な文章や説明、マークダウン(\`\`\`)は不要です。
+
+出力フォーマット:
+{
+  "question": "問題文",
+  "answerOptions": [
+    {"text":"選択肢1","isCorrect":false,"rationale":"理由"},
+    {"text":"選択肢2","isCorrect":true,"rationale":"理由"},
+    {"text":"選択肢3","isCorrect":false,"rationale":"理由"}
+  ],
+  "keyword_explanation": "キーワードの解説"
+}
 `;
 
   try {
@@ -40,7 +50,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "No text response from Gemini", raw: data });
     }
 
-    // 不要な ```json ``` 記号を削除
+    // マークダウン除去
     const cleaned = text.replace(/```json|```/g, "").trim();
 
     let quiz;
@@ -48,6 +58,15 @@ export default async function handler(req, res) {
       quiz = JSON.parse(cleaned);
     } catch (e) {
       return res.status(500).json({ error: "Invalid JSON from Gemini", raw: cleaned });
+    }
+
+    // バリデーション（最低限）
+    if (
+      !quiz.question ||
+      !Array.isArray(quiz.answerOptions) ||
+      quiz.answerOptions.length < 3
+    ) {
+      return res.status(500).json({ error: "Quiz missing required fields", raw: quiz });
     }
 
     res.status(200).json(quiz);
