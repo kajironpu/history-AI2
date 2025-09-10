@@ -31,19 +31,35 @@ export default async function handler(req, res) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-goog-api-key": process.env.GEN_API_KEY,
+          "x-goog-api-key": process.env.GEN_API_KEY,
         },
         body: JSON.stringify({
-          temperature: 0.7,
-          candidate_count: 1,
-          max_output_tokens: 500,
           contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 500,
+          },
         }),
       }
     );
 
     const data = await response.json();
-    res.status(200).json(data);
+
+    // Gemini の返却内容からテキスト部分を抽出
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) {
+      return res.status(500).json({ error: "No text response from Gemini API", raw: data });
+    }
+
+    // 返ってきた JSON 文字列をパース
+    let quiz;
+    try {
+      quiz = JSON.parse(text);
+    } catch (e) {
+      return res.status(500).json({ error: "Invalid JSON from Gemini", raw: text });
+    }
+
+    res.status(200).json(quiz);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
