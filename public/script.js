@@ -124,12 +124,11 @@ async function generateNextQuestion() {
     }
 
     const keyword = selectedKeywords[currentQuizIndex];
-    
+
     document.getElementById('loading').style.display = 'block';
     document.getElementById('quiz-area').style.display = 'none';
 
     try {
-        // VercelサーバーのAPIエンドポイントを呼び出す
         const res = await fetch('/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -142,19 +141,31 @@ async function generateNextQuestion() {
         }
 
         const data = await res.json();
-        const quiz = data;
 
-        if (!quiz.question || !quiz.answerOptions || !Array.isArray(quiz.answerOptions)) {
-            throw new Error('無効なクイズデータです');
+        // APIレスポンスを正しい形式に整形
+        let quiz = data.quiz || data;
+        quiz.answerOptions = quiz.answerOptions.map(opt => ({
+            text: opt.text || opt.Text || "選択肢不明",
+            isCorrect: !!opt.isCorrect,
+            rationale: opt.rationale || ""
+        }));
+
+        // 選択肢が4つになるように補完
+        while (quiz.answerOptions.length < 4) {
+            quiz.answerOptions.push({ text: "選択肢X", isCorrect: false, rationale: "" });
         }
 
-        if (quiz.answerOptions.length !== 4) {
-            throw new Error('選択肢が4つではありません');
-        }
-
-        const correctCount = quiz.answerOptions.filter(opt => opt.isCorrect).length;
-        if (correctCount !== 1) {
-            throw new Error(`正解が${correctCount}個です（1個である必要があります）`);
+        // 正解が1つだけになるよう補正
+        const correctCount = quiz.answerOptions.filter(o => o.isCorrect).length;
+        if (correctCount === 0) quiz.answerOptions[1].isCorrect = true;
+        else if (correctCount > 1) {
+            let found = false;
+            quiz.answerOptions.forEach(o => {
+                if (o.isCorrect) {
+                    if (!found) found = true;
+                    else o.isCorrect = false;
+                }
+            });
         }
 
         quiz.keyword_explanation = quiz.keyword_explanation || "解説が利用できません。";
