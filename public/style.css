@@ -139,13 +139,20 @@ button:disabled {
 
 #next-question-btn {
     display: none;
-    margin: 15px auto 0; /* 上:15px、左右:autoで中央寄せ */
+    margin: 20px auto 0;       /* 中央寄せ */
     background-color: #28a745;
-    padding: 10px 15px;
-    width: auto;         /* 内容に合わせる */
-    max-width: 300px;
-    border-radius: 8px;
+    padding: 15px 30px;        /* 縦横の余白を増やす */
+    font-size: 20px;           /* 文字サイズアップ */
+    font-weight: bold;         /* 太字で目立たせる */
+    width: 100%;               /* 横幅いっぱい */
+    max-width: 400px;          /* ただし最大400pxまで */
+    border-radius: 12px;       /* 角を丸める */
     text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* 影で立体感 */
+    cursor: pointer;
+}
+#next-question-btn:hover {
+    background-color: #218838;
 }
 
 
