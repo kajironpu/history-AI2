@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   const prompt = `
 中学生向けの歴史クイズを作ってください。
 正解は「${keyword}」です。
-絶対にJSON形式のみで返してください。余計な文章や説明、マークダウン(\`\`\`)は不要です。
+絶対にJSON形式のみで返してください。余計な文章や説明、マークダウン(\`\`\`)は不要。
 
 出力フォーマット:
 {
@@ -50,7 +50,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "No text response from Gemini", raw: data });
     }
 
-    // マークダウン除去
     const cleaned = text.replace(/```json|```/g, "").trim();
 
     let quiz;
@@ -60,14 +59,26 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Invalid JSON from Gemini", raw: cleaned });
     }
 
-    // バリデーション（最低限）
-    if (
-      !quiz.question ||
-      !Array.isArray(quiz.answerOptions) ||
-      quiz.answerOptions.length < 3
-    ) {
-      return res.status(500).json({ error: "Quiz missing required fields", raw: quiz });
+    // 選択肢が3つ未満なら補完
+    while (quiz.answerOptions.length < 3) {
+      quiz.answerOptions.push({ text: "選択肢X", isCorrect: false, rationale: "" });
     }
+
+    // 正解が1つだけになるよう補正
+    const correctCount = quiz.answerOptions.filter(o => o.isCorrect).length;
+    if (correctCount === 0) quiz.answerOptions[0].isCorrect = true;
+    else if (correctCount > 1) {
+      let found = false;
+      quiz.answerOptions.forEach(o => {
+        if (o.isCorrect) {
+          if (!found) found = true;
+          else o.isCorrect = false;
+        }
+      });
+    }
+
+    // 解説がない場合は補完
+    if (!quiz.keyword_explanation) quiz.keyword_explanation = "解説が利用できません。";
 
     res.status(200).json(quiz);
   } catch (err) {
