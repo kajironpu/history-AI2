@@ -8,12 +8,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "keyword is required" });
   }
 
-  const prompt = `
-中学生向けの歴史クイズを作ってください。
-対象の時代は「${era}」です。
-正解は「${keyword}」です。
-必ずその時代に沿った問題にしてください。
-絶対にJSON形式のみで返してください。余計な文章やマークダウンは不要。
+const prompt = `
+あなたは中学生向けの歴史教師です。
+以下の条件に従ってクイズを作ってください。
+
+条件:
+1. 対象の時代は「${era}」です。
+2. 正解は必ず「${keyword}」です。
+3. 問題文と選択肢はその時代に沿った内容にしてください。
+4. 選択肢は3つで、正解は1つだけ。
+5. 選択肢には必ず理由(rationale)を付けてください。
+6. 絶対にJSON形式のみで返してください。
+7. マークダウンや余計な文章は一切含めないでください。
 
 出力フォーマット:
 {
@@ -26,6 +32,7 @@ export default async function handler(req, res) {
   "keyword_explanation": "キーワードの解説"
 }
 `;
+
 
   try {
     const response = await fetch(
