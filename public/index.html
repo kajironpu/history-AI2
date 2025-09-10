@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>歴史暗記アプリ</title>
-  <!-- public/style.css に置いた場合はルートからのパスで参照 -->
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="/favicon.ico">
 </head>
@@ -24,6 +23,8 @@
     </div>
 
     <div id="quiz-area" style="display:none;">
+      <!-- ここに残り問題数と正解率を表示 -->
+      <div id="progress-area" style="margin-bottom:10px; font-weight:bold;"></div>
       <div id="question-text"></div>
       <ul id="options-list"></ul>
       <div id="rationale-box"></div>
@@ -31,7 +32,6 @@
     </div>
   </div>
 
-  <!-- public/script.js に置いた場合も / から参照 -->
   <script src="/script.js"></script>
 </body>
 </html>
