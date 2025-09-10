@@ -2,11 +2,6 @@ let questionsByEra = {};
 let selectedKeywords = [];
 let currentQuizIndex = 0;
 
-// デバッグ関数（開発用）
-function addDebugInfo(message) {
-    // console.log(message); // 必要に応じて有効化
-}
-
 // CSV読み込み
 async function loadDataFromCSV() {
     try {
@@ -92,8 +87,7 @@ function getFallbackQuiz(keyword) {
         answerOptions: [
             { text: "選択肢A", isCorrect: false },
             { text: "選択肢B（正解）", isCorrect: true },
-            { text: "選択肢C", isCorrect: false },
-            { text: "選択肢D", isCorrect: false }
+            { text: "選択肢C", isCorrect: false }
         ],
         keyword_explanation: `※APIエラーのため、仮の問題です。キーワード「${keyword}」について学習しましょう。`
     };
@@ -141,23 +135,16 @@ async function generateNextQuestion() {
         }
 
         const data = await res.json();
+        const quiz = data;
 
-        // APIレスポンスを正しい形式に整形
-        let quiz = data.quiz || data;
-        quiz.answerOptions = quiz.answerOptions.map(opt => ({
-            text: opt.text || opt.Text || "選択肢不明",
-            isCorrect: !!opt.isCorrect,
-            rationale: opt.rationale || ""
-        }));
-
-        // 選択肢が4つになるように補完
-        while (quiz.answerOptions.length < 4) {
+        // 選択肢が3つになるように補完
+        while (quiz.answerOptions.length < 3) {
             quiz.answerOptions.push({ text: "選択肢X", isCorrect: false, rationale: "" });
         }
 
         // 正解が1つだけになるよう補正
         const correctCount = quiz.answerOptions.filter(o => o.isCorrect).length;
-        if (correctCount === 0) quiz.answerOptions[1].isCorrect = true;
+        if (correctCount === 0) quiz.answerOptions[0].isCorrect = true;
         else if (correctCount > 1) {
             let found = false;
             quiz.answerOptions.forEach(o => {
