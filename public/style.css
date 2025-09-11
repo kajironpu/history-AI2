@@ -98,13 +98,15 @@ select {
 .option-item {
     padding: 12px;
     margin: 8px 0;
-    background-color: #f8f9fa;  /* 元の色に戻す */
+    background-color: #f8f9fa;
     border: 2px solid #dee2e6;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
     word-wrap: break-word;
+    width: 100%;
+    max-width: 400px; /* PC用 */
 }
 
 .option-item:hover {
@@ -138,11 +140,11 @@ select {
 /* 次の問題ボタン（中央寄せ） */
 #next-question-btn {
     display: block;            
-    margin: 15px auto 0 auto;  /* 左右自動で中央寄せ */
+    margin: 15px auto 0 auto;  /* 左右中央寄せ */
     padding: 10px 15px;
     width: 100%;
     max-width: 300px;
-    background-color: #28a745;  /* 緑色ボタン */
+    background-color: #28a745;  
     color: white;
     border: none;
     border-radius: 5px;
@@ -188,10 +190,10 @@ select {
     }
 
     .option-item {
-        padding: 12px;
-        font-size: 1em;
         width: 100%;
         max-width: 100%;
+        padding: 12px;
+        font-size: 1em;
     }
 
     #next-question-btn {
