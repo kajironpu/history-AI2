@@ -21,9 +21,10 @@ body {
     flex-direction: column;
     height: 100vh;
     max-height: 100vh;
+    width: 100%;        /* 横いっぱい */
+    max-width: 100%;    /* 最大幅制限解除 */
     box-sizing: border-box;
     overflow-y: auto;
-    width: 100%;
 }
 
 h1 {
@@ -47,6 +48,7 @@ select, button {
     border-radius: 5px;
     font-size: 16px;
     width: 100%;
+    max-width: 400px;
     box-sizing: border-box;
 }
 
@@ -88,12 +90,12 @@ button:disabled {
     margin-bottom: 15px;
     color: #333;
     text-align: center;
-    padding: 15px;
-    border: 1px solid #cce5ff;
-    background-color: #e0f2ff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    line-height: 1.5;
+
+    /* シンプルな枠 */
+    border: 2px solid #007bff;
+    border-radius: 6px;
+    padding: 12px;
+    background-color: #f9fcff;
 }
 
 #options-list {
@@ -101,6 +103,7 @@ button:disabled {
     padding: 0;
     margin: 0 auto;
     width: 100%;
+    max-width: 400px;
 }
 
 .option-item {
@@ -172,7 +175,7 @@ button:disabled {
     box-sizing: border-box;
 }
 
-/* スマホ対応（480px以下） */
+/* スマホ対応 */
 @media (max-width: 480px) {
     body {
         padding: 0;
