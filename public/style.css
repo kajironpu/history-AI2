@@ -114,16 +114,17 @@ select {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    text-align: left;
-    word-wrap: break-word;
     width: calc(100% - 40px);
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
     display: flex;
-    align-items: center; /* マークとテキストを縦方向に揃える */
-    position: relative;
+    align-items: center;        /* 縦中央揃え */
+    justify-content: center;    /* 横中央揃え（マーク＋テキスト全体） */
+    gap: 10px;                  /* マークと文字の間隔 */
+    text-align: center;         /* 文字中央揃え */
+    word-wrap: break-word;
 }
 
 .option-item:hover {
@@ -148,14 +149,12 @@ select {
     content: "○";
     color: #28a745;
     font-weight: bold;
-    margin-right: 10px;
 }
 
 .option-item.incorrect::before {
     content: "X";
     color: #dc3545;
     font-weight: bold;
-    margin-right: 10px;
 }
 
 /* 解説ボックス */
