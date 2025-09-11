@@ -107,24 +107,39 @@ select {
 }
 
 .option-item {
+    display: flex;
+    align-items: center;      /* 縦方向中央揃え */
+    text-align: left;         /* 文字は左揃え */
+    width: calc(100% - 40px);
+    max-width: 600px;
+    margin: 8px auto;
     padding: 12px;
-    margin: 8px 0;
     background-color: #f8f9fa;
     border: 2px solid #dee2e6;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s;
-    width: calc(100% - 40px);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;        /* 縦中央揃え */
-    justify-content: center;    /* 横中央揃え（マーク＋テキスト全体） */
-    gap: 10px;                  /* マークと文字の間隔 */
-    text-align: center;         /* 文字中央揃え */
-    word-wrap: break-word;
+    transition: all 0.3s;
+}
+
+/* マーク（○/X）を左端に固定 */
+.option-item.correct::before,
+.option-item.incorrect::before {
+    display: inline-block;
+    width: 20px;             /* マーク分の固定幅 */
+    text-align: center;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.option-item.correct::before {
+    content: "○";
+    color: #28a745;
+}
+
+.option-item.incorrect::before {
+    content: "X";
+    color: #dc3545;
 }
 
 .option-item:hover {
@@ -142,19 +157,6 @@ select {
     background-color: #f8d7da;
     border-color: #dc3545;
     color: #721c24;
-}
-
-/* 正解・不正解マーク */
-.option-item.correct::before {
-    content: "○";
-    color: #28a745;
-    font-weight: bold;
-}
-
-.option-item.incorrect::before {
-    content: "X";
-    color: #dc3545;
-    font-weight: bold;
 }
 
 /* 解説ボックス */
