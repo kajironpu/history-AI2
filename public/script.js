@@ -210,7 +210,7 @@ function checkAnswer(option, element, quiz) {
     document.getElementById('next-question-btn').style.display = 'block';
 
     const result = option.isCorrect ? '正解！' : '不正解';
-    rationaleBox.innerHTML = `<strong>${result}</strong><br><br><strong>解説:</strong><br>${quiz.keyword_explanation}`;
+    rationaleBox.innerHTML = `<strong>解説:</strong><br>${quiz.keyword_explanation}`;
 
     updateProgress();
 }
