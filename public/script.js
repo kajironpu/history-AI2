@@ -46,7 +46,6 @@ async function loadDataFromCSV() {
             userMessage = 'ローカルファイルでは動作しません。ローカルサーバー（例: VS Code Live Server）で開いてください。';
         }
         alert(`アプリを起動できません。\n${userMessage}\n\n"data.csv" ファイルを確認してください。`);
-        document.getElementById('start-quiz-btn').disabled = true;
         throw error;
     }
 }
@@ -85,10 +84,7 @@ function getFallbackQuiz(keyword) {
 // クイズ開始
 async function startQuiz() {
     const selectedEra = document.getElementById('era-select').value;
-    if (!selectedEra) {
-        alert('時代を選択してください');
-        return;
-    }
+    if (!selectedEra) return;
 
     if (!questionsByEra[selectedEra] || questionsByEra[selectedEra].length === 0) {
         alert('選択された時代にキーワードが登録されていません');
@@ -108,7 +104,8 @@ async function startQuiz() {
 function updateProgress() {
     const remaining = selectedKeywords.length - (currentQuizIndex + 1);
     const rate = ((correctCount / (currentQuizIndex + 1)) * 100).toFixed(1);
-    document.getElementById('progress-area').textContent = `残り問題: ${remaining}問 | 現在の正解率: ${rate}%`;
+    document.getElementById('progress-area').textContent =
+        `残り問題: ${remaining}問 | 現在の正解率: ${rate}%`;
 }
 
 // 問題生成
@@ -132,15 +129,12 @@ async function generateNextQuestion() {
 
         if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
 
-        const data = await res.json();
-        const quiz = data;
+        const quiz = await res.json();
 
-        // 選択肢が3つになるよう補完
         while (quiz.answerOptions.length < 3) {
             quiz.answerOptions.push({ text: "選択肢X", isCorrect: false, rationale: "" });
         }
 
-        // 正解は1つだけ
         let correctCountInOptions = quiz.answerOptions.filter(o => o.isCorrect).length;
         if (correctCountInOptions === 0) quiz.answerOptions[0].isCorrect = true;
         else if (correctCountInOptions > 1) {
@@ -221,12 +215,22 @@ function checkAnswer(option, element, quiz) {
     updateProgress();
 }
 
-// イベント
-document.getElementById('start-quiz-btn').addEventListener('click', startQuiz);
+// --- イベント ---
+// 「次の問題」ボタン
 document.getElementById('next-question-btn').addEventListener('click', () => {
     currentQuizIndex++;
     generateNextQuestion();
 });
 
+// 「時代を選んだら自動スタート」
+document.getElementById('era-select').addEventListener('change', () => {
+    const selectedEra = document.getElementById('era-select').value;
+    if (selectedEra) {
+        startQuiz();
+    }
+});
+
 // 初期読み込み
-document.addEventListener('DOMContentLoaded', () => loadDataFromCSV().catch(err => console.error(err)));
+document.addEventListener('DOMContentLoaded', () =>
+    loadDataFromCSV().catch(err => console.error(err))
+);
