@@ -194,25 +194,24 @@ function displayQuiz(quiz) {
 // 選択肢クリック時
 function checkAnswer(option, element, quiz) {
     const optionItems = document.querySelectorAll('.option-item');
+    // 全ての選択肢のクリックイベントを無効にする
     optionItems.forEach(item => item.style.pointerEvents = 'none');
 
-    element.className = option.isCorrect ? 'option-item correct' : 'option-item incorrect';
+    // 選択肢の色分けをしないため、classNameを変更する処理は削除
 
-    if (option.isCorrect) correctCount++;
-
-    if (!option.isCorrect) {
-        optionItems.forEach((item, index) => {
-            if (quiz.answerOptions[index].isCorrect) item.className = 'option-item correct';
-        });
+    // 正解数を更新（内部的に保持しておく）
+    if (option.isCorrect) {
+        correctCount++;
     }
 
     const rationaleBox = document.getElementById('rationale-box');
     rationaleBox.style.display = 'block';
     document.getElementById('next-question-btn').style.display = 'block';
 
-    //const result = option.isCorrect ? '正解！' : '不正解';
+    // 解説ボックスに解説文を表示
     rationaleBox.innerHTML = `<strong>解説:</strong><br>${quiz.keyword_explanation}`;
 
+    // 進捗（正解率など）を更新
     updateProgress();
 }
 
