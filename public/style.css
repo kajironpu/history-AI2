@@ -73,14 +73,13 @@ select {
 }
 
 #progress-area {
-    width: calc(100% - 40px); /* container paddingを考慮 */
+    width: calc(100% - 40px);
     max-width: 600px;
-    margin: 0 auto 10px auto; /* 上下マージンで少し余白、左右中央寄せ */
+    margin: 0 auto 10px auto;
     font-weight: bold;
-    text-align: right; /* 左寄せのまま */
+    text-align: right;
     box-sizing: border-box;
 }
-
 
 /* 問題文 */
 #question-text {
@@ -89,11 +88,11 @@ select {
     margin-bottom: 15px;
     color: #333;
     text-align: center;
-    border: 2px solid #007bff; /* 青の枠線 */
+    border: 2px solid #007bff;
     border-radius: 6px;
     padding: 12px;
     background-color: #f9fcff;
-    width: calc(100% - 40px); /* containerの左右paddingを考慮 */
+    width: calc(100% - 40px);
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -115,13 +114,16 @@ select {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    text-align: center;
+    text-align: left;
     word-wrap: break-word;
-    width: calc(100% - 40px); /* #question-textと同じ幅 */
+    width: calc(100% - 40px);
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
+    display: flex;
+    align-items: center; /* マークとテキストを縦方向に揃える */
+    position: relative;
 }
 
 .option-item:hover {
@@ -139,6 +141,21 @@ select {
     background-color: #f8d7da;
     border-color: #dc3545;
     color: #721c24;
+}
+
+/* 正解・不正解マーク */
+.option-item.correct::before {
+    content: "○";
+    color: #28a745;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.option-item.incorrect::before {
+    content: "X";
+    color: #dc3545;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 /* 解説ボックス */
@@ -160,9 +177,9 @@ select {
 /* 次の問題ボタン（中央寄せ） */
 #next-question-btn {
     display: block;            
-    margin: 15px auto 0 auto; /* 中央寄せ */
+    margin: 15px auto 0 auto;
     padding: 10px 15px;
-    width: calc(100% - 40px); /* #question-textと同じ幅 */
+    width: calc(100% - 40px);
     max-width: 300px;
     background-color: #28a745;
     color: white;
@@ -178,7 +195,7 @@ select {
     background-color: #218838;
 }
 
-/* APIキー入力エリア（任意） */
+/* APIキー入力エリア */
 .api-key-area {
     margin-bottom: 15px;
     padding: 10px;
@@ -198,7 +215,7 @@ select {
 /* スマホ対応（480px以下） */
 @media (max-width: 480px) {
     .container {
-        padding: 10px; /* スマホ用に少し余白を減らす */
+        padding: 10px;
     }
 
     #question-text,
