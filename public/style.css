@@ -23,7 +23,7 @@ body {
     max-height: 100vh;
     box-sizing: border-box;
     overflow-y: auto;
-    width: 100%; /* 追加 */
+    width: 100%;
 }
 
 h1 {
@@ -47,7 +47,7 @@ select, button {
     border-radius: 5px;
     font-size: 16px;
     width: 100%;
-    /* max-width: 400px;  削除 */
+    /* max-width: 400px; を削除 */
     box-sizing: border-box;
 }
 
@@ -89,6 +89,14 @@ button:disabled {
     margin-bottom: 15px;
     color: #333;
     text-align: center;
+    
+    /* 以下を追加/修正 */
+    padding: 15px; /* 内側の余白 */
+    border: 1px solid #cce5ff; /* 薄い青色の枠線 */
+    background-color: #e0f2ff; /* 薄い水色の背景 */
+    border-radius: 8px; /* 角を丸くする */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* 軽い影 */
+    line-height: 1.5; /* 行の高さを調整して読みやすく */
 }
 
 #options-list {
@@ -96,99 +104,4 @@ button:disabled {
     padding: 0;
     margin: 0 auto;
     width: 100%;
-    /* max-width: 400px;  削除 */
-}
-
-.option-item {
-    padding: 12px;
-    margin: 8px 0;
-    background-color: #f8f9fa;
-    border: 2px solid #dee2e6;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-align: center;
-    word-wrap: break-word;
-}
-
-.option-item:hover {
-    background-color: #e9ecef;
-    border-color: #007bff;
-}
-
-.option-item.correct {
-    background-color: #d4edda;
-    border-color: #28a745;
-    color: #155724;
-}
-
-.option-item.incorrect {
-    background-color: #f8d7da;
-    border-color: #dc3545;
-    color: #721c24;
-}
-
-#rationale-box {
-    display: none;
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #e7f3ff;
-    border-left: 4px solid #007bff;
-    border-radius: 5px;
-    font-size: 0.95em;
-}
-
-#next-question-btn {
-    display: none;
-    margin-top: 15px;
-    background-color: #28a745;
-    padding: 10px 15px;
-    width: 100%;
-    max-width: 300px;
-    align-self: center;
-}
-
-#next-question-btn:hover {
-    background-color: #218838;
-}
-
-.api-key-area {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #fff3cd;
-    border: 1px solid #ffeaa7;
-    border-radius: 5px;
-}
-
-.api-key-area input {
-    width: 100%;
-    max-width: 400px;
-    padding: 8px;
-    margin: 5px 0;
-    box-sizing: border-box;
-}
-
-/* スマホ対応（480px以下） */
-@media (max-width: 480px) {
-    body {
-        padding: 0;
-    }
-
-    .container {
-        padding: 15px;
-    }
-
-    #question-text {
-        font-size: 1em;
-    }
-
-    .option-item {
-        padding: 10px;
-        font-size: 0.95em;
-    }
-
-    #rationale-box {
-        font-size: 0.9em;
-        padding: 10px;
-    }
-}
+    /* max-width: 400px; を
