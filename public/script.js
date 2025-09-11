@@ -1,4 +1,3 @@
-
 let questionsByEra = {};
 let selectedKeywords = [];
 let currentQuizIndex = 0;
@@ -197,9 +196,7 @@ function checkAnswer(option, element, quiz) {
     // 全ての選択肢のクリックイベントを無効にする
     optionItems.forEach(item => item.style.pointerEvents = 'none');
 
-    // 選択肢の色分けをしないため、classNameを変更する処理は削除
-
-    // 正解数を更新（内部的に保持しておく）
+    // 正解数を更新（内部的には保持しておく）
     if (option.isCorrect) {
         correctCount++;
     }
