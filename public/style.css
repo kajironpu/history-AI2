@@ -1,3 +1,4 @@
+/* 基本設定 */
 html, body {
     height: 100%;
     margin: 0;
@@ -12,6 +13,7 @@ body {
     align-items: center;
 }
 
+/* コンテナ */
 .container {
     background: white;
     padding: 20px;
@@ -27,6 +29,7 @@ body {
     overflow-y: auto;
 }
 
+/* タイトル */
 h1 {
     text-align: center;
     color: #333;
@@ -34,6 +37,7 @@ h1 {
     font-size: 1.8em;
 }
 
+/* セットアップエリア */
 .setup-area {
     margin-bottom: 20px;
     display: flex;
@@ -41,7 +45,7 @@ h1 {
     align-items: center;
 }
 
-select, button {
+select {
     padding: 10px 15px;
     margin: 5px 0;
     border: 1px solid #ddd;
@@ -52,22 +56,7 @@ select, button {
     box-sizing: border-box;
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border: none;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
+/* ローディング表示 */
 #loading {
     display: none;
     text-align: center;
@@ -76,28 +65,28 @@ button:disabled {
     margin: 10px 0;
 }
 
+/* クイズエリア */
 #quiz-area {
     display: none;
     flex: 1;
-    display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
+/* 問題文 */
 #question-text {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 15px;
     color: #333;
     text-align: center;
-
-    /* シンプルな枠 */
     border: 2px solid #007bff;
     border-radius: 6px;
     padding: 12px;
     background-color: #f9fcff;
 }
 
+/* 選択肢 */
 #options-list {
     list-style: none;
     padding: 0;
@@ -109,32 +98,32 @@ button:disabled {
 .option-item {
     padding: 12px;
     margin: 8px 0;
-    background-color: #f8f9fa;
-    border: 2px solid #dee2e6;
+    background-color: #007bff;  /* 全体ボタンと同じ青系 */
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
-    word-wrap: break-word;
+    color: white;
+    font-weight: bold;
 }
 
 .option-item:hover {
-    background-color: #e9ecef;
-    border-color: #007bff;
+    background-color: #0056b3;
 }
 
 .option-item.correct {
-    background-color: #d4edda;
+    background-color: #28a745;
     border-color: #28a745;
-    color: #155724;
+    color: #fff;
 }
 
 .option-item.incorrect {
-    background-color: #f8d7da;
+    background-color: #dc3545;
     border-color: #dc3545;
-    color: #721c24;
+    color: #fff;
 }
 
+/* 解説ボックス */
 #rationale-box {
     display: none;
     margin-top: 15px;
@@ -145,20 +134,27 @@ button:disabled {
     font-size: 0.95em;
 }
 
+/* 次の問題ボタン */
 #next-question-btn {
-    display: none;
-    margin-top: 15px;
-    background-color: #28a745;
+    display: block;            
+    margin: 15px auto 0 auto;  
     padding: 10px 15px;
     width: 100%;
     max-width: 300px;
-    align-self: center;
+    background-color: #007bff;  
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 #next-question-btn:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
 
+/* APIキー入力エリア（任意） */
 .api-key-area {
     margin-bottom: 15px;
     padding: 10px;
@@ -175,7 +171,7 @@ button:disabled {
     box-sizing: border-box;
 }
 
-/* スマホ対応 */
+/* スマホ対応（480px以下） */
 @media (max-width: 480px) {
     body {
         padding: 0;
@@ -191,8 +187,17 @@ button:disabled {
     }
 
     .option-item {
-        padding: 10px;
-        font-size: 0.95em;
+        padding: 12px;
+        font-size: 1em;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #next-question-btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px;
+        font-size: 1em;
     }
 
     #rationale-box {
