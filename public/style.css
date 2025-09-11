@@ -23,8 +23,8 @@ body {
     flex-direction: column;
     height: 100vh;
     max-height: 100vh;
-    width: 100%;        /* 横いっぱい */
-    max-width: 100%;    /* 最大幅制限解除 */
+    width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -98,29 +98,30 @@ select {
 .option-item {
     padding: 12px;
     margin: 8px 0;
-    background-color: #007bff;  /* 全体ボタンと同じ青系 */
+    background-color: #f8f9fa;  /* 元の色に戻す */
+    border: 2px solid #dee2e6;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
-    color: white;
-    font-weight: bold;
+    word-wrap: break-word;
 }
 
 .option-item:hover {
-    background-color: #0056b3;
+    background-color: #e9ecef;
+    border-color: #007bff;
 }
 
 .option-item.correct {
-    background-color: #28a745;
+    background-color: #d4edda;
     border-color: #28a745;
-    color: #fff;
+    color: #155724;
 }
 
 .option-item.incorrect {
-    background-color: #dc3545;
+    background-color: #f8d7da;
     border-color: #dc3545;
-    color: #fff;
+    color: #721c24;
 }
 
 /* 解説ボックス */
@@ -134,14 +135,14 @@ select {
     font-size: 0.95em;
 }
 
-/* 次の問題ボタン */
+/* 次の問題ボタン（中央寄せ） */
 #next-question-btn {
     display: block;            
-    margin: 15px auto 0 auto;  
+    margin: 15px auto 0 auto;  /* 左右自動で中央寄せ */
     padding: 10px 15px;
     width: 100%;
     max-width: 300px;
-    background-color: #007bff;  
+    background-color: #28a745;  /* 緑色ボタン */
     color: white;
     border: none;
     border-radius: 5px;
@@ -151,7 +152,7 @@ select {
 }
 
 #next-question-btn:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }
 
 /* APIキー入力エリア（任意） */
