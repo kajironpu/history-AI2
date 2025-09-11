@@ -121,16 +121,19 @@ select {
     cursor: pointer;
     box-sizing: border-box;
     transition: all 0.3s;
+    position: relative;       /* 相対配置を追加 */
 }
 
-/* マーク（○/X）を左端に固定 */
+/* マーク（○/X）を中央配置しつつ左端に配置 */
 .option-item.correct::before,
 .option-item.incorrect::before {
-    display: inline-block;
-    width: 20px;             /* マーク分の固定幅 */
-    text-align: center;
-    margin-right: 10px;
+    position: absolute;
+    left: 12px;              /* 左端に固定 */
+    top: 50%;
+    transform: translateY(-50%);  /* 縦方向中央配置 */
     font-weight: bold;
+    width: 20px;
+    text-align: center;
 }
 
 .option-item.correct::before {
@@ -141,6 +144,12 @@ select {
 .option-item.incorrect::before {
     content: "X";
     color: #dc3545;
+}
+
+/* マークがある場合のテキスト調整 */
+.option-item.correct,
+.option-item.incorrect {
+    padding-left: 42px;      /* マーク分のパディングを追加 */
 }
 
 .option-item:hover {
