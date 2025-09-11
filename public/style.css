@@ -19,10 +19,11 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
-    height: 100vh; /* 高さを100%に */
+    height: 100vh;
     max-height: 100vh;
     box-sizing: border-box;
-    overflow-y: auto; /* 内容が長くなったときスクロール可能 */
+    overflow-y: auto;
+    width: 100%; /* 追加 */
 }
 
 h1 {
@@ -46,7 +47,7 @@ select, button {
     border-radius: 5px;
     font-size: 16px;
     width: 100%;
-    max-width: 400px;
+    /* max-width: 400px;  削除 */
     box-sizing: border-box;
 }
 
@@ -95,7 +96,7 @@ button:disabled {
     padding: 0;
     margin: 0 auto;
     width: 100%;
-    max-width: 400px;
+    /* max-width: 400px;  削除 */
 }
 
 .option-item {
@@ -137,39 +138,15 @@ button:disabled {
     font-size: 0.95em;
 }
 
-/* 開始ボタンの幅を固定して中央寄せ */
-#start-quiz-btn {
-    display: block;           /* ブロック要素にして幅を効かせる */
-    width: 100%;              /* 親幅いっぱい */
-    max-width: 400px;         /* 最大幅を制限 */
-    margin: 20px auto;        /* 中央寄せ */
-    padding: 15px 30px;       /* 高さ・横幅を広げる */
-    font-size: 18px;          /* 文字を大きくする */
-    font-weight: bold;
-    text-align: center;
-    box-sizing: border-box;   /* paddingを幅に含める */
-    cursor: pointer;
-}
-
 #next-question-btn {
     display: none;
-    margin: 20px auto 0;       /* 中央寄せ */
+    margin-top: 15px;
     background-color: #28a745;
-    padding: 15px 30px;        /* 縦横の余白を増やす */
-    font-size: 20px;           /* 文字サイズアップ */
-    font-weight: bold;         /* 太字で目立たせる */
-    width: 100%;               /* 横幅いっぱい */
-    max-width: 400px;          /* ただし最大400pxまで */
-    border-radius: 12px;       /* 角を丸める */
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* 影で立体感 */
-    cursor: pointer;
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 300px;
+    align-self: center;
 }
-#next-question-btn:hover {
-    background-color: #218838;
-}
-
-
 
 #next-question-btn:hover {
     background-color: #218838;
