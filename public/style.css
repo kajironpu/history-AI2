@@ -109,7 +109,8 @@ select {
 .option-item {
     display: flex;
     align-items: center;      /* 縦方向中央揃え */
-    text-align: left;         /* 文字は左揃え */
+    justify-content: center;  /* 水平方向中央揃え */
+    text-align: center;       /* 文字は中央揃え */
     width: calc(100% - 40px);
     max-width: 600px;
     margin: 8px auto;
