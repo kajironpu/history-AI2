@@ -72,6 +72,16 @@ select {
     justify-content: flex-start;
 }
 
+#progress-area {
+    width: calc(100% - 40px); /* container paddingを考慮 */
+    max-width: 600px;
+    margin: 0 auto 10px auto; /* 上下マージンで少し余白、左右中央寄せ */
+    font-weight: bold;
+    text-align: left; /* 左寄せのまま */
+    box-sizing: border-box;
+}
+
+
 /* 問題文 */
 #question-text {
     font-size: 1.2em;
